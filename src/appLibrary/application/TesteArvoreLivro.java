@@ -3,7 +3,7 @@ package appLibrary.application;
 import appLibrary.model.entities.Livro;
 import appLibrary.model.comparators.ComparadorID;
 import appLibrary.model.comparators.ComparadorNome;
-import lib.ArvoreBinaria;
+import lib.ArvoreAVL;
 
 import java.util.Comparator;
 import java.util.InputMismatchException;
@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 public class TesteArvoreLivro {
     public static void main(String[] args) {
-        ArvoreBinaria<Livro> arvore = new ArvoreBinaria<>(new ComparadorID());
+        ArvoreAVL<Livro> arvore = new ArvoreAVL<>(new ComparadorID());
         Scanner scanner = new Scanner(System.in);
         int opcao;
 
