@@ -1,7 +1,6 @@
 package lib;
 
 import java.util.Comparator;
-import lib.*;
 
 public class ArvoreAVL <T> extends ArvoreBinaria<T>{
 
