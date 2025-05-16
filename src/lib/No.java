@@ -34,4 +34,29 @@ public class No<T> {
     public void setDireito(No<T> direito) {
         this.direito = direito;
     }
+
+
+    public int obterAltura(){
+        return obterAltura(this);
+    }
+
+    public int obterAltura(No<T> r){
+        if (r==null)
+            return -1;
+        
+        else{
+            int hd = obterAltura(r.getDireito());
+            int he = obterAltura(r.getEsquerdo());
+            if (hd > he){
+                return hd + 1;
+            }
+            else{
+                return he + 1;
+            }
+        }
+    }
+
+    public int fatorBalanceamento(){
+        return obterAltura(this.direito) - obterAltura(this.esquerdo);
+    }
 }

@@ -375,4 +375,9 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         sb.append(no.getValor()).append(" ");
     }
 
+    public No<T> adcionar(No<T> raiz2, No<T> novo) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'adcionar'");
+    }
+
 }

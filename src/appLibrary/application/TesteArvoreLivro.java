@@ -119,17 +119,22 @@ public class TesteArvoreLivro {
                 case 8:
                     System.out.print("Digite o ID do novo livro: ");
                     int novoId = scanner.nextInt();
+
                     scanner.nextLine(); // Consome a nova linha
                     System.out.print("Digite o título do novo livro: ");
                     String novoTitulo = scanner.nextLine();
+
                     System.out.print("Digite o autor do novo livro: ");
                     String novoAutor = scanner.nextLine();
+
                     System.out.print("Digite o gênero do novo livro: ");
                     String novoGenero = scanner.nextLine();
+
                     Livro novoLivro = new Livro(novoId, novoTitulo, novoAutor, novoGenero);
                     arvore.adicionar(novoLivro);
                     System.out.println("Livro adicionado com sucesso.");
                     break;
+                    
                 case 0:
                     System.out.println("Saindo do programa.");
                     break;
