@@ -4,12 +4,52 @@ import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import org.w3c.dom.Node;
-
 public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
+    protected static class No<T> {
+        T valor;
+        No<T> esquerdo;
+        No<T> direito;
+        int altura; // Adicionado para AVL
+
+        public No(T valor) {
+            this.valor = valor;
+            this.esquerdo = null;
+            this.direito = null;
+            this.altura = 0; // Altura inicial de um novo nó
+        }
+
+        public T getValor() {
+            return valor;
+        }
+
+        public No<T> getEsquerdo() {
+            return esquerdo;
+        }
+
+        public void setEsquerdo(No<T> esquerdo) {
+            this.esquerdo = esquerdo;
+        }
+
+        public No<T> getDireito() {
+            return direito;
+        }
+
+        public void setDireito(No<T> direito) {
+            this.direito = direito;
+        }
+
+        public int getAltura() {
+            return altura;
+        }
+
+        public void setAltura(int altura) {
+            this.altura = altura;
+        }
+    }
+
     private No<T> raiz;
-    private Comparator<T> comparador;
+    protected Comparator<T> comparador; // Tornando protected para ArvoreAVL acessar
 
     public ArvoreBinaria(Comparator<T> comparador) {
         this.comparador = comparador;
@@ -17,41 +57,42 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     /**
      * Método que adiciona um novo valor à árvore binária.
-     * 
+     *
      * @param novoValor o valor que será adicionado à árvore binária
      */
     @Override
     public void adicionar(T novoValor) {
-        No<T> novoNo = new No<>(novoValor);
-        if (raiz == null) {
-            raiz = novoNo;
-            return;
+        raiz = adicionarRecursivo(raiz, novoValor);
+    }
+
+    /**
+     * Método auxiliar recursivo para adicionar um novo valor à árvore.
+     *
+     * @param noAtual   O nó atual na recursão.
+     * @param novoValor O valor a ser inserido.
+     * @return O nó raiz da subárvore (possivelmente alterado após inserção).
+     */
+    protected No<T> adicionarRecursivo(No<T> noAtual, T novoValor) {
+        if (noAtual == null) {
+            return new No<>(novoValor);
         }
-        No<T> atual = raiz;
-        while (true) {
-            int comparacao = comparador.compare(novoValor, atual.valor);
-            if (comparacao < 0) {
-                if (atual.esquerdo == null) {
-                    atual.esquerdo = novoNo;
-                    return;
-                }
-                atual = atual.esquerdo;
-            } else if (comparacao > 0) {
-                if (atual.direito == null) {
-                    atual.direito = novoNo;
-                    return;
-                }
-                atual = atual.direito;
-            } else {
-                // Se for igual... o que faremos??? Será admitido alguns valores iguais? Vai ser acreditado que não teremos que nos preocupar com isso?
-                return;
-            }
+
+        int comparacao = comparador.compare(novoValor, noAtual.valor);
+
+        if (comparacao < 0) {
+            noAtual.esquerdo = adicionarRecursivo(noAtual.esquerdo, novoValor);
+        } else if (comparacao > 0) {
+            noAtual.direito = adicionarRecursivo(noAtual.direito, novoValor);
+        } else {
+            // Valor duplicado, não fazemos nada
+            return noAtual;
         }
+        return noAtual; // Retorna o nó atualizado (para as chamadas recursivas)
     }
 
     /**
      * Método para pesquisar um valor na árvore, utilizando o comparador padrão
-     * 
+     *
      * @param valor o valor a ser pesquisado na árvore
      * @return o valor do nó encontrado, ou null se o valor não for encontrado
      */
@@ -64,11 +105,9 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
             if (comparacao == 0) {
                 return atual.valor;
-            }
-            else if (comparacao < 0) {
+            } else if (comparacao < 0) {
                 atual = atual.esquerdo;
-            }
-            else {
+            } else {
                 atual = atual.direito;
             }
         }
@@ -77,7 +116,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     /**
      * Método para pesquisar um valor na árvore, utilizando comparador personalizado
-     * 
+     *
      * @param valor o valor a ser pesquisado na árvore
      * @return o valor do nó encontrado, ou null se o valor não for encontrado
      */
@@ -94,21 +133,19 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
             if (comparacao == 0) {
                 return atual.getValor();
-            }
-            else if (comparacao < 0) {
+            } else if (comparacao < 0) {
                 atual = atual.getEsquerdo();
-            }
-            else {
+            } else {
                 atual = atual.getDireito();
             }
         }
         return null;
     }
-    
+
     /**
      * Método para realizar a pesquisa linear (quando o comparador é diferente do usado na árvore)
-     * 
-     * @param valor 
+     *
+     * @param valor
      * @param comparador
      * @return o valor do nó encontrado ou null caso não seja encontrado
      */
@@ -119,47 +156,46 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
     /**
      * Método recursivo para realizar a pesquisa usando travessia pré-ordem
      * A travessia pré-ordem percorre o nó atual, depois o filho esquerdo e depois o filho direito
-     * 
-     * @param no o nó atual sendo analisado
-     * @param valor o valor a ser pesquisado
+     *
+     * @param no         o nó atual sendo analisado
+     * @param valor      o valor a ser pesquisado
      * @param comparador o comparador utilizado para a comparação
      * @return o valor do nó encontrado ou null caso não encontre
      */
     private T pesquisarPreOrdem(No<T> no, T valor, Comparator comparador) {
         if (no == null) {
-            return null;  
+            return null;
         }
-    
+
         int comparacao = comparador.compare(valor, no.getValor());
         if (comparacao == 0) {
-            return no.getValor();  
+            return no.getValor();
         }
-    
+
         T resultadoEsquerdo = pesquisarPreOrdem(no.getEsquerdo(), valor, comparador);
         if (resultadoEsquerdo != null) {
-            return resultadoEsquerdo; 
+            return resultadoEsquerdo;
         }
-    
-        return pesquisarPreOrdem(no.getDireito(), valor, comparador); 
+
+        return pesquisarPreOrdem(no.getDireito(), valor, comparador);
     }
 
     /**
      * Remove um nó da árvore binária e retorna o valor do nó removido.
-     * 
-     * 
+     *
      * @param valor o valor do nó a ser removido
      * @return o valor do nó removido, ou null se o nó não for encontrado
      */
     @Override
     public T remover(T valor) {
+        // A implementação de remoção para ArvoreBinaria permanece a mesma
         No<T> atual = raiz;
         No<T> pai = raiz;
         boolean filho_esquerdo = true;
 
         while (atual != null && comparador.compare(valor, atual.getValor()) != 0) {
             pai = atual;
-            if (comparador.compare(valor, atual.getValor()) < 0)
-            {
+            if (comparador.compare(valor, atual.getValor()) < 0) {
                 filho_esquerdo = true;
                 atual = atual.getEsquerdo();
             } else {
@@ -168,7 +204,11 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
             }
         }
 
-        if (atual == null) {return null;}
+        if (atual == null) {
+            return null;
+        }
+
+        T valorRemovido = atual.getValor();
 
         // CASO 1 : *** NÓ SEM FILHOS (É UMA FOLHA) ***
         if (atual.getEsquerdo() == null && atual.getDireito() == null) {
@@ -176,7 +216,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
             else if (filho_esquerdo) pai.setEsquerdo(null);
             else pai.setDireito(null);
         }
-        
+
         // CASO 2 : *** NÓ COM FILHOS APENAS NA ESQUERDA ***
         else if (atual.getDireito() == null) {
             if (atual == raiz) {
@@ -208,58 +248,58 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
             successor.setEsquerdo(atual.getEsquerdo());
         }
 
-        return atual.getValor(); 
+        return valorRemovido;
     }
 
     /**
      * Encontra o sucessor de um nó a ser apagado em uma árvore binária de busca.
-     * 
-     * @param apagar 
+     *
+     * @param apagar
      * @return sucessor
      */
-    private No<T> noSucessor(No<T> apagar) { 
+    private No<T> noSucessor(No<T> apagar) {
         No<T> paiSucessor = apagar;
         No<T> sucessor = apagar;
         No<T> atual = apagar.getDireito();
-    
+
         while (atual != null) {
             paiSucessor = sucessor;
             sucessor = atual;
             atual = atual.getEsquerdo();
         }
-    
+
         if (sucessor != apagar.getDireito()) {
             paiSucessor.setEsquerdo(sucessor.getDireito());
             sucessor.setDireito(apagar.getDireito());
         }
 
-        return sucessor;    
+        return sucessor;
     }
 
     /**
      * Método que retorna a altura da árvore binária.
-     * 
+     *
      * @return altura
      */
     @Override
     public int altura() {
-        return altura(raiz) -1;
+        return altura(raiz) - 1;
     }
 
     /**
      * Método auxiliar recursivo que calcula a altura de um nó da árvore binária.
-     * 
+     *
      * @param no o nó a partir do qual a altura será calculada
      * @return a altura do nó na árvore
      */
-    private int altura(No<T> no) {
+    protected int altura(No<T> no) { // Tornando protected para ArvoreAVL acessar
         if (no == null) {
             return 0;
         }
         int alturaLadoEsquerdo = altura(no.esquerdo);
         int alturaLadoDireito = altura(no.direito);
         if (alturaLadoEsquerdo > alturaLadoDireito) {
-            return alturaLadoEsquerdo +1 ;
+            return alturaLadoEsquerdo + 1;
         } else {
             return alturaLadoDireito + 1;
         }
@@ -267,17 +307,18 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
 
     /**
      * Método que retorna a quantidade de nós da árvore binária.
-     * 
+     *
      * @return quantidadedeNos
      */
     @Override
     public int quantidadeNos() {
         return quantidadeNos(raiz);
     }
+
     /**
      * Método auxiliar recursivo que calcula a quantidade de um nós da árvore binária.
-     * 
-     * @param no 
+     *
+     * @param no
      * @return quantidadeNos
      */
     private int quantidadeNos(No<T> no) {
@@ -297,30 +338,31 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         StringBuilder sb = new StringBuilder();
         if (raiz != null) {
             Queue<No<T>> fila = new LinkedList<>();
-            fila.add(raiz);  
-            caminharEmNivel(fila, sb); 
+            fila.add(raiz);
+            caminharEmNivel(fila, sb);
         }
         return sb.toString().trim();
     }
+
     /**
      * Método auxiliar recursivo que realiza o percurso em nível na árvore binária,
      * adicionando os valores visitados ao StringBuilder fornecido.
-     * 
+     *
      * @param fila a fila que contém os nós da árvore a serem visitados
-     * @param sb o StringBuilder usado para acumular os valores
+     * @param sb   o StringBuilder usado para acumular os valores
      */
     private void caminharEmNivel(Queue<No<T>> fila, StringBuilder sb) {
         if (fila.isEmpty()) return;
 
-        No<T> atual = fila.poll();  
-        sb.append(atual.getValor()).append(" "); 
-    
+        No<T> atual = fila.poll();
+        sb.append(atual.getValor()).append(" ");
+
         if (atual.getEsquerdo() != null) fila.add(atual.getEsquerdo());
         if (atual.getDireito() != null) fila.add(atual.getDireito());
 
         caminharEmNivel(fila, sb);
     }
-    
+
     /**
      * Retorna uma String contendo os elementos da árvore em ordem (Esquerda -> Raiz -> Direita).
      *
@@ -332,6 +374,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         caminharEmOrdem(raiz, sb);
         return sb.toString().trim();
     }
+
     /**
      * Método auxiliar recursivo que realiza o percurso em ordem na árvore binária,
      * adicionando os valores visitados ao StringBuilder fornecido.
@@ -354,7 +397,7 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
      * @param no o nó atual da árvore sendo visitado.
      * @param sb o StringBuilder usado para acumular os valores.
      */
-    public String caminharPosOrdem(){
+    public String caminharPosOrdem() {
         StringBuilder sb = new StringBuilder();
         caminharPosOrdem(raiz, sb);
         return sb.toString().trim();
@@ -374,10 +417,4 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
         caminharPosOrdem(no.getDireito(), sb);
         sb.append(no.getValor()).append(" ");
     }
-
-    public No<T> adcionar(No<T> raiz2, No<T> novo) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'adcionar'");
-    }
-
 }
