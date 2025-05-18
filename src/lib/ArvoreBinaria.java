@@ -188,92 +188,48 @@ public class ArvoreBinaria<T> implements IArvoreBinaria<T> {
      */
     @Override
     public T remover(T valor) {
-        // A implementação de remoção para ArvoreBinaria permanece a mesma
-        No<T> atual = raiz;
-        No<T> pai = raiz;
-        boolean filho_esquerdo = true;
-
-        while (atual != null && comparador.compare(valor, atual.getValor()) != 0) {
-            pai = atual;
-            if (comparador.compare(valor, atual.getValor()) < 0) {
-                filho_esquerdo = true;
-                atual = atual.getEsquerdo();
-            } else {
-                filho_esquerdo = false;
-                atual = atual.getDireito();
-            }
-        }
-
-        if (atual == null) {
-            return null;
-        }
-
-        T valorRemovido = atual.getValor();
-
-        // CASO 1 : *** NÓ SEM FILHOS (É UMA FOLHA) ***
-        if (atual.getEsquerdo() == null && atual.getDireito() == null) {
-            if (atual == raiz) raiz = null;
-            else if (filho_esquerdo) pai.setEsquerdo(null);
-            else pai.setDireito(null);
-        }
-
-        // CASO 2 : *** NÓ COM FILHOS APENAS NA ESQUERDA ***
-        else if (atual.getDireito() == null) {
-            if (atual == raiz) {
-                raiz = atual.getEsquerdo();
-            } else if (filho_esquerdo) {
-                pai.setEsquerdo(atual.getEsquerdo());
-            } else {
-                pai.setDireito(atual.getEsquerdo());
-            }
-        }
-
-        // CASO 3 : *** NÓ COM FILHOS APENAS NA DIREITA ***
-        else if (atual.getEsquerdo() == null) {
-            if (atual == raiz) {
-                raiz = atual.getDireito();
-            } else if (filho_esquerdo) {
-                pai.setEsquerdo(atual.getDireito());
-            } else {
-                pai.setDireito(atual.getDireito());
-            }
-        }
-
-        // CASO 4 : *** NÓ COM FILHOS EM AMBOS LADOS ***
-        else {
-            No<T> successor = noSucessor(atual);
-            if (atual == raiz) raiz = successor;
-            else if (filho_esquerdo) pai.setEsquerdo(successor);
-            else pai.setDireito(successor);
-            successor.setEsquerdo(atual.getEsquerdo());
-        }
-
-        return valorRemovido;
+        raiz = removerRecursivo(raiz, valor);
+        return (raiz != null) ? pesquisar(valor) : null;
     }
 
     /**
-     * Encontra o sucessor de um nó a ser apagado em uma árvore binária de busca.
+     * Método auxiliar recursivo para remover um nó da árvore binária.
      *
-     * @param apagar
-     * @return sucessor
+     * @param noAtual O nó atual na recursão.
+     * @param valor   O valor a ser removido.
+     * @return O nó raiz da subárvore (possivelmente alterado após a remoção).
      */
-    private No<T> noSucessor(No<T> apagar) {
-        No<T> paiSucessor = apagar;
-        No<T> sucessor = apagar;
-        No<T> atual = apagar.getDireito();
-
-        while (atual != null) {
-            paiSucessor = sucessor;
-            sucessor = atual;
-            atual = atual.getEsquerdo();
+    protected No<T> removerRecursivo(No<T> noAtual, T valor) {
+        if (noAtual == null) {
+            return null; // Valor não encontrado
         }
 
-        if (sucessor != apagar.getDireito()) {
-            paiSucessor.setEsquerdo(sucessor.getDireito());
-            sucessor.setDireito(apagar.getDireito());
-        }
+        int comparacao = comparador.compare(valor, noAtual.valor);
 
-        return sucessor;
+        if (comparacao < 0) {
+            noAtual.esquerdo = removerRecursivo(noAtual.esquerdo, valor);
+        } else if (comparacao > 0) {
+            noAtual.direito = removerRecursivo(noAtual.direito, valor);
+        } else { // Encontrou o nó a ser removido
+            if (noAtual.esquerdo == null) {
+                return noAtual.direito;
+            } else if (noAtual.direito == null) {
+                return noAtual.esquerdo;
+            }
+
+            // Nó com dois filhos: encontrar o sucessor (menor nó na subárvore direita)
+            No<T> sucessor = encontrarMinimo(noAtual.direito);
+            noAtual.valor = sucessor.valor;
+            noAtual.direito = removerRecursivo(noAtual.direito, sucessor.valor);
+        }
+        return noAtual; // Retorna o nó atualizado (para as chamadas recursivas)
+    }
+
+    private No<T> encontrarMinimo(No<T> no) {
+        while (no.esquerdo != null) {
+            no = no.esquerdo;
+        }
+        return no;
     }
 
     /**

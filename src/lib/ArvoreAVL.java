@@ -39,24 +39,8 @@ public class ArvoreAVL <T> extends ArvoreBinaria<T>{
         return rotacaoEsquerda(r);
     }
 
-    // Adicionar
-    public void adicionar(T novoValor){
-        No<T> raiz = super.adicionarRecursivo(novoValor);
-
-        if (raiz.fatorBalanceamento() > 1){
-            if (raiz.getDireito().fatorBalanceamento() > 0)
-                raiz = this.rotacaoEsquerda(raiz);
-            else
-                raiz = this.rotacaoDireitaEsquerda(raiz);
-        }
-        else if (raiz.fatorBalanceamento() < -1){
-            if (raiz.getEsquerdo().fatorBalanceamento() < 0)
-                raiz = this.rotacaoDireita(raiz);
-            else
-                raiz = this.rotacaoEsquerdaDireita(raiz);
-        }
-        return;
-    }
+    // adicionar
+    
 
     // Remover
 
