@@ -78,8 +78,8 @@ Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as vers�
 Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
 * **Romulo Alves Luciano** - *Implementação e Documentação* - [RomuloAlves2507](https://github.com/RomuloAlves2507)
-* **Vitor do Nascimento Ramos** - *Implementação e Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
-* **Allicia Rocha dos Santos** - *Implementação e Documentaçãoo* - [fulanodetal](https://github.com/linkParaPerfil)
+* **Vitor do Nascimento Ramos** - *Implementação e Documentação* - [nascimentoVitor10](https://github.com/nascimentoVitor10)
+* **Allicia Rocha dos Santos** - *Implementação e Documentaçãoo* - [alliciarocha](https://github.com/alliciarocha)
 
 Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
 
