@@ -1,7 +1,7 @@
 ## 🚀 Implementação e Estruturação da Classe Árvore AVL
 ### 🧩 Etapa 4 - Desenvolvimento da classe de Árvore AVL
 Este trabalho detalha o desenvolvimento de uma classe para representar a estrutura de dados Árvore AVL. Essa estrutura auto-balanceada garante a eficiência das operações de busca através de mecanismos que mantêm a árvore equilibrada após inserções e remoções de nós. A classe implementada inclui os métodos **adicionar** e **remover**, cruciais para a manipulação da árvore, juntamente com os métodos auxiliares essenciais para realizar o balanceamento dinâmico.
-### ⚙️ Pré-requisitos
+#### ⚙️ Pré-requisitos
 Antes de executar o projeto, você precisará ter instalado:
 * [Java JDK 17+](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) 
 * [Git](https://git-scm.com/) (opcional, para clonar o repositório)
@@ -11,7 +11,7 @@ Para verificar se está tudo certo:
 java -version
 git --version
 ```
-### 📥 Instalação
+#### 📥 Instalação
 1. Clone este repositório:
    ```bash
    git clone [https://github.com/alliciarocha/ArvoreAVL.git]
@@ -21,10 +21,12 @@ git --version
 3. Compile o código:
    ```bash
    javac AppRelatorioAVL.java
-### 🖥️ Uso
+#### 🖥️ Uso
 - Para rodar o programa, execute o comando: 
    ```bash
    javac AppRelatorioAVL.java
+### 📝 Etapa 5 - Confecção do relatório sobre árvores AVL
+* [[TPA] Relatório III - Allicia Rocha, Romulo Alves, Vitor Nascimento](https://docs.google.com/document/d/1fzEThERj6EUU_T_2Or5LaLBdmrZt5ka-m_gsTPccHQU/edit?usp=sharing)
 ### ✒️ Autores
 Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 * 👨🏻‍💻 **Romulo Alves Luciano** - *Implementação e Documentação* - [RomuloAlves2507](https://github.com/RomuloAlves2507)
