@@ -13,67 +13,43 @@ Antes de executar o projeto, você precisará ter instalado:
 * [Java JDK 17+](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) 
 * [Git](https://git-scm.com/) (opcional, para clonar o repositório)
 
+Para verificar se está tudo certo:
+
 ```
-Dar exemplos
+java -version
+git --version
 ```
 
 ### 🔧 Instalação
 
-Uma série de exemplos passo-a-passo que informam o que você deve executar para ter um ambiente de desenvolvimento em execução.
-
-Diga como essa etapa será:
+Siga os passos abaixo para clonar e executar o projeto:
 
 ```
-Dar exemplos
+# Clone o repositório
+git clone https://github.com/alliciarocha/ArvoreAVL
+
+# Acesse o diretório do projeto
+cd ArvoreAVL
 ```
 
-E repita:
+Compile todos os arquivos do projeto:
 
 ```
-Até finalizar
+javac -d bin src/**/*.java
 ```
 
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
-
-## ⚙️ Executando os testes
-
-Explicar como executar os testes automatizados para este sistema.
-
-### 🔩 Analise os testes de ponta a ponta
-
-Explique que eles verificam esses testes e porquê.
+Execute o arquivo principal:
 
 ```
-Dar exemplos
+java -cp bin app.AppRelatorioAVL
 ```
 
-### ⌨️ E testes de estilo de codificação
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
-
-## 📦 Implantação
-
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
+O arquivo **AppRelatorioAVL.java ** é o ponto de entrada da aplicação, responsável por executar os testes e exibir os resultados relacionados à árvore AVL.
 
 ## 🛠️ Construído com
 
-Mencione as ferramentas que você usou para criar seu projeto
-
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
-* [Maven](https://maven.apache.org/) - Gerente de Dependência
-* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
-
-## 🖇️ Colaborando
-
-Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
-
-## 📌 Versão
-
-Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/suas/tags/do/projeto). 
+* Java - Linguagem de programação principal
+* Bibliotecas padrão do Java SE - Nenhuma dependência externa foi utilizada
 
 ## ✒️ Autores
 
@@ -86,4 +62,4 @@ Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
 
 ---
-⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+⌨️ com ❤️ por [alliciarocha](https://github.com/alliciarocha) 😊
