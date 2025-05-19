@@ -77,7 +77,7 @@ Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as vers�
 
 Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
-* **Romulo Alves Luciano** - *Implementação e Documentação* - [umdesenvolvedor](https://github.com/linkParaPerfil)
+* **Romulo Alves Luciano** - *Implementação e Documentação* - [RomuloAlves2507](https://github.com/RomuloAlves2507)
 * **Vitor do Nascimento Ramos** - *Implementação e Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
 * **Allicia Rocha dos Santos** - *Implementação e Documentaçãoo* - [fulanodetal](https://github.com/linkParaPerfil)
 
