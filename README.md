@@ -27,8 +27,8 @@ git --version
    javac AppRelatorioAVL.java
 ## ✒️ Autores
 Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
-* **Romulo Alves Luciano** - *Implementação e Documentação* - [RomuloAlves2507](https://github.com/RomuloAlves2507)
-* **Vitor do Nascimento Ramos** - *Implementação e Documentação* - [nascimentoVitor10](https://github.com/nascimentoVitor10)
-* **Allicia Rocha dos Santos** - *Implementação e Documentaçãoo* - [alliciarocha](https://github.com/alliciarocha)
+* 👨🏻‍💻 **Romulo Alves Luciano** - *Implementação e Documentação* - [RomuloAlves2507](https://github.com/RomuloAlves2507)
+* 👨🏽‍💻 **Vitor do Nascimento Ramos** - *Implementação e Documentação* - [nascimentoVitor10](https://github.com/nascimentoVitor10)
+* 👩🏻‍💻 **Allicia Rocha dos Santos** - *Implementação e Documentaçãoo* - [alliciarocha](https://github.com/alliciarocha)
 ---
 ⌨️ com ❤️ por [alliciarocha](https://github.com/alliciarocha) 😊
