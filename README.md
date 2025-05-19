@@ -9,7 +9,9 @@ Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar 
 
 ### 📋 Pré-requisitos
 
-De que coisas você precisa para instalar o software e como instalá-lo?
+Antes de executar o projeto, você precisará ter instalado:
+* [Java JDK 17+](https://www.oracle.com/java/technologies/javase/jdk17-archive-downloads.html) 
+* [Git](https://git-scm.com/) (opcional, para clonar o repositório)
 
 ```
 Dar exemplos
