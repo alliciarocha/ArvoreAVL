@@ -5,8 +5,6 @@ Este trabalho detalha o desenvolvimento de uma classe para representar a estrutu
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
-Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar o projeto.
-
 ### 📋 Pré-requisitos
 
 Antes de executar o projeto, você precisará ter instalado:
@@ -44,7 +42,7 @@ Execute o arquivo principal:
 java -cp bin app.AppRelatorioAVL
 ```
 
-O arquivo **AppRelatorioAVL.java ** é o ponto de entrada da aplicação, responsável por executar os testes e exibir os resultados relacionados à árvore AVL.
+O arquivo AppRelatorioAVL.java é o ponto de entrada da aplicação, responsável por executar os testes e exibir os resultados relacionados à árvore AVL.
 
 ## 🛠️ Construído com
 
